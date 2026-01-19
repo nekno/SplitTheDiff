@@ -6,7 +6,7 @@ namespace SplitTheDiff
 {
     public partial class MainForm : Form
     {
-        private static readonly Keys[] disabledKeys = [Keys.OemMinus, Keys.OemPeriod, Keys.Oemcomma, Keys.Decimal, Keys.Subtract];
+        private static readonly Keys[] disabledKeys = [Keys.Decimal, Keys.Enter, Keys.Oemcomma, Keys.OemMinus, Keys.OemPeriod, Keys.Subtract];
 
         #region Public
 
