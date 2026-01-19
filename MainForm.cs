@@ -4,43 +4,72 @@ using System.Windows.Input;
 
 namespace SplitTheDiff
 {
-	public partial class MainForm : Form
+    public partial class MainForm : Form
     {
-		private static readonly Keys[] disabledKeys = [Keys.OemMinus, Keys.OemPeriod, Keys.Oemcomma, Keys.Decimal, Keys.Subtract];
+        private static readonly Keys[] disabledKeys = [Keys.OemMinus, Keys.OemPeriod, Keys.Oemcomma, Keys.Decimal, Keys.Subtract];
 
-		public MainForm()
+        #region Public
+
+        public MainForm()
         {
             InitializeComponent();
         }
-		private void MainForm_Load(object sender, EventArgs e)
-		{
-			numericUpDown1.SelectAll();
-		}
-		private void NumericUpDown_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (disabledKeys.Contains(e.KeyCode))
-				e.SuppressKeyPress = true;
-		}
 
-		private void NumericUpDown_KeyUp(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode != Keys.Enter)
-				return;
+        #endregion Public
 
-			var numericUpDown = (sender == numericUpDown1) ? numericUpDown2 : numericUpDown1;
+        #region Private
 
-			numericUpDown.SelectAll();
-		}
+        #region Event Handlers
 
-		private void NumericUpDown_ValueChanged(object sender, EventArgs e)
-		{
-			var diff = Math.Abs(numericUpDown1.Value - numericUpDown2.Value) / (decimal)2;
-			diff += Math.Min(numericUpDown1.Value, numericUpDown2.Value);
-			resultLabel.Text = diff.ToString();
-		}
-	}
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            numericUpDown1.SelectAll();
 
-	public static class NumericUpDownExtensions
+            alwaysOnTopCheckBox.Checked = Properties.Settings.Default.AlwaysOnTop;
+            setTopMost();
+        }
+        private void NumericUpDown_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (disabledKeys.Contains(e.KeyCode))
+                e.SuppressKeyPress = true;
+        }
+
+        private void NumericUpDown_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+            var numericUpDown = (sender == numericUpDown1) ? numericUpDown2 : numericUpDown1;
+
+            numericUpDown.SelectAll();
+        }
+
+        private void NumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            var diff = Math.Abs(numericUpDown1.Value - numericUpDown2.Value) / (decimal)2;
+            diff += Math.Min(numericUpDown1.Value, numericUpDown2.Value);
+            resultLabel.Text = diff.ToString();
+        }
+
+        private void alwaysOnTopCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            setTopMost();
+
+            Properties.Settings.Default.AlwaysOnTop = alwaysOnTopCheckBox.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        #endregion Event Handlers
+
+        private void setTopMost()
+        {
+            TopMost = alwaysOnTopCheckBox.Checked;
+        }
+
+        #endregion Private
+    }
+
+    public static class NumericUpDownExtensions
 	{
 		public static void SelectAll(this NumericUpDown numericUpDown)
 		{
