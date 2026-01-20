@@ -104,6 +104,7 @@ namespace WinForms
             Name = "MainForm";
             Text = "Split The Diff";
             Load += MainForm_Load;
+            Activated += MainForm_Activated;
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
             ResumeLayout(false);

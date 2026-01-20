@@ -23,11 +23,16 @@ namespace WinForms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            numericUpDown1.SelectAll();
-
             alwaysOnTopCheckBox.Checked = Properties.Settings.Default.AlwaysOnTop;
             setTopMost();
         }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            var numericUpDown = numericUpDown2.Focused ? numericUpDown2 : numericUpDown1;
+            numericUpDown.SelectAll();
+        }
+
         private void NumericUpDown_KeyDown(object sender, KeyEventArgs e)
         {
             if (disabledKeys.Contains(e.KeyCode))
@@ -40,7 +45,6 @@ namespace WinForms
                 return;
 
             var numericUpDown = (sender == numericUpDown1) ? numericUpDown2 : numericUpDown1;
-
             numericUpDown.SelectAll();
         }
 
