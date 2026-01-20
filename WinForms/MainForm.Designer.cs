@@ -1,7 +1,7 @@
 ﻿
 
 
-namespace SplitTheDiff
+namespace WinForms
 {
     partial class MainForm
     {

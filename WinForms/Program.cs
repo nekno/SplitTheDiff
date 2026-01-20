@@ -1,4 +1,4 @@
-namespace SplitTheDiff
+namespace WinForms
 {
     internal static class Program
     {

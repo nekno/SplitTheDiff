@@ -2,7 +2,7 @@ using System.ComponentModel.Design.Serialization;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace SplitTheDiff
+namespace WinForms
 {
     public partial class MainForm : Form
     {

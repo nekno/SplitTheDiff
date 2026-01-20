@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SplitTheDiff.Properties {
+namespace WinForms.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
